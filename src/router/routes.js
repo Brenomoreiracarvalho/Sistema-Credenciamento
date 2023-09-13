@@ -2,7 +2,6 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'singin', component: () => import('pages/singIn/Index.vue') }
