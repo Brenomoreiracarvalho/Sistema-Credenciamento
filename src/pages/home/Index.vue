@@ -54,6 +54,18 @@
     <div>
       <div class="container">
         <div>
+          <q-btn
+            class="left"
+            unelevated
+            rounded
+            color="primary"
+            label="Novo Evento"
+            to="/cadastroevento"
+          >
+            <q-icon name="add" />
+          </q-btn>
+        </div>
+        <div>
           <q-input
             class="right"
             filled
@@ -79,17 +91,53 @@
   </div>
   <div>
     <div>
-      <div>
-        <div class="my-card center margin">
-          <q-card clas="my-card" bordered="true">
-            <q-card-actions class="text-black">
-              <q-card-section class="my-card">
-                <q-btn flat no-caps to="/eventos">
-                  <div class="text-h6">EVENTO</div>
-                </q-btn>
-              </q-card-section>
-            </q-card-actions>
-          </q-card>
+      <div class="margin">
+        <div class="q-pa-md">
+          <q-table
+            flat
+            bordered
+            title="Eventos"
+            :rows="rows"
+            :columns="columns"
+            row-key="name"
+            :selected-rows-label="getSelectedString"
+            selection="multiple"
+            v-model:selected="selected"
+          >
+          </q-table>
+          <!-- <q-markup-table>
+            <thead>
+              <tr>
+                <th class="text-center">
+                  <q-checkbox v-model="val" />
+                </th>
+                <th class="text-center">{{ empresa }}</th>
+                <th class="text-center">{{ assunto }}</th>
+                <th class="text-center">{{ dataEnvio }}</th>
+                <th class="text-center">{{ destino }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">
+                  <q-checkbox v-model="val" />
+                </td>
+                <td class="text-center">{{ texto }}</td>
+                <td class="text-center">{{ local }}</td>
+                <td class="text-center">{{ dataEnv }}</td>
+                <td class="text-center">{{ destinatario }}</td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <q-checkbox v-model="value" />
+                </td>
+                <td class="text-center">{{ texto }}</td>
+                <td class="text-center">{{ local }}</td>
+                <td class="text-center">{{ dataEnv }}</td>
+                <td class="text-center">{{ destinatario }}</td>
+              </tr>
+            </tbody>
+          </q-markup-table> -->
         </div>
       </div>
     </div>
@@ -99,9 +147,71 @@
 import { defineComponent } from "vue";
 import { ref } from "vue";
 
+const columns = [
+  {
+    name: "desc",
+    required: true,
+    label: "Evento",
+    align: "left",
+    field: (row) => row.name,
+    format: (val) => `${val}`,
+    sortable: true,
+  },
+  {
+    name: "Data Inicial",
+    align: "center",
+    label: "Data de inicio",
+    field: "dataInit",
+    sortable: true,
+  },
+  {
+    name: "Data Final",
+    align: "center",
+    label: "Data de fim",
+    field: "dataEnd",
+    sortable: true,
+  },
+  {
+    name: "local",
+    align: "center",
+    label: "Local",
+    field: "local",
+    sortable: true,
+  },
+  {
+    name: "contratante",
+    align: "center",
+    label: "Contratante",
+    field: "contratante",
+  },
+  { name: "edit", align: "center", label: "", field: "edit" },
+];
+
+const rows = [
+  {
+    name: "Tardezinha",
+    dataInit: "17/10/2023",
+    dataEnd: "18/10/2023",
+    local: "Mané Garrincha",
+    contratante: "Funn",
+    edit: "edit",
+  },
+];
+
 export default defineComponent({
   name: "IndexPage",
+  // props: {
+  //   texto: [],
+  //   dataEnv: [],
+  //   destinatario: [],
+  //   local: [],
+  //   empresa: [],
+  //   assunto: [],
+  //   dataEnvio: [],
+  //   destino: [],
+  // },
   setup() {
+    const selected = ref([]);
     const submitting = ref(false);
     function submit() {
       submitting.value = true;
@@ -115,8 +225,13 @@ export default defineComponent({
     return {
       submitting,
       submit,
+      val: ref(false),
+      value: ref(false),
       text: ref(""),
       dense: ref(false),
+      selected,
+      columns,
+      rows,
     };
   },
 });
@@ -137,12 +252,17 @@ export default defineComponent({
 }
 
 .margin {
-  margin-left: 20%;
   margin-top: 7%;
 }
 
 .right {
   float: right;
   margin-right: 1%;
+}
+
+.left {
+  float: left;
+  margin-left: 1%;
+  margin-top: 1%;
 }
 </style>
