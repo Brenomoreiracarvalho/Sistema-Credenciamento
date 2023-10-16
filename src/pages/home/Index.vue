@@ -24,11 +24,10 @@
       </q-toolbar>
 
       <q-toolbar inset>
-        <q-btn color="grey" label="EVENTOS" />
+        <q-btn color="grey" label="EVENTOS" no-caps to="/eventos" />
         <q-btn color="grey" label="RELATÓRIOS" />
 
         <q-btn color="grey" label="CADASTRO" />
-        <q-btn color="grey" label="EVENTOS" />
         <q-btn-dropdown color="grey" label="OUTROS">
           <q-list>
             <q-item clickable v-close-popup @click="onItemClick">
@@ -85,9 +84,8 @@
           <q-card clas="my-card" bordered="true">
             <q-card-actions class="text-black">
               <q-card-section class="my-card">
-                <q-btn flat>
-                  <div class="text-h6">Our Changing Planet</div>
-                  <div class="text-subtitle2">by John Doe</div>
+                <q-btn flat no-caps to="/eventos">
+                  <div class="text-h6">EVENTO</div>
                 </q-btn>
               </q-card-section>
             </q-card-actions>
