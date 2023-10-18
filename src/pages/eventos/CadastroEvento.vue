@@ -65,6 +65,10 @@
 
         <q-space />
 
+        <q-input outlined v-model="local" label="LOCAL" />
+
+        <q-space />
+
         <div class="q-pa-md">
           <q-date v-model="model" range />
         </div>
@@ -95,6 +99,7 @@ export default defineComponent({
       console.log(this.contract);
       console.log(this.cnpj);
       console.log(this.model);
+      this.$router.push("/home")
     },
   },
   setup() {
@@ -117,6 +122,7 @@ export default defineComponent({
       text: ref(""),
       contract: ref(""),
       cnpj: ref(""),
+      local: ref(""),
       dense: ref(false),
       model: ref({ from: "", to: "" }),
     };

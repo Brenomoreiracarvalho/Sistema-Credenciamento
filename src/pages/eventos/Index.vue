@@ -91,7 +91,7 @@
         <div>
             <div class="margin">
                 <div class="q-pa-md">
-                    <!-- <q-table
+                    <q-table
                         flat bordered
                         title="Eventos"
                         :rows="rows"
@@ -103,8 +103,14 @@
                         
                         
                     >   
-                    </q-table> -->
-                    <q-markup-table>
+                        <template v-slot:body-cell-edit="props">
+                            <q-td :props="props">
+                            <q-btn icon="mode_edit" @click="onEdit(props.rows)"></q-btn>
+                            <q-btn icon="delete" @click="onDelete(props.rows)"></q-btn>
+                            </q-td>
+                        </template>
+                    </q-table>
+                    <!-- <q-markup-table>
                         <thead>
                             <tr>
                                 <th class="text-center">
@@ -136,7 +142,7 @@
                                 <td class="text-center">{{ destinatario }}</td>
                             </tr>
                         </tbody>
-                    </q-markup-table>
+                    </q-markup-table> -->
                 </div>
             </div>
         </div>
@@ -168,6 +174,13 @@ const rows = [
     data: "17/10/2023",
     local: "Mané Garrincha",
     contratante: "Funn",
+    edit: "edit"
+  },
+  {
+    name: 'Na praia',
+    data: "20/10/2023",
+    local: "ST de Clubes",
+    contratante: "R2",
     edit: "edit"
   },
 ]

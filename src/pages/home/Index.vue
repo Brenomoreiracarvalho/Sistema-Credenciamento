@@ -104,40 +104,20 @@
             selection="multiple"
             v-model:selected="selected"
           >
+          <!-- <template v-slot:body-cell-config="props">
+              <q-td :props="props">
+              <q-btn icon="mode_settings" @click="onEdit()"></q-btn>
+              </q-td>
+            </template> -->
+            <template v-slot:body-cell-edit="props">
+              <q-td :props="props">
+              <q-btn icon="mode_settings" to="/funcionarios"></q-btn>
+              <q-btn icon="mode_edit" @click="onEdit()"></q-btn>
+              <q-btn icon="delete" @click="onDelete()"></q-btn>
+              </q-td>
+            </template>
           </q-table>
-          <!-- <q-markup-table>
-            <thead>
-              <tr>
-                <th class="text-center">
-                  <q-checkbox v-model="val" />
-                </th>
-                <th class="text-center">{{ empresa }}</th>
-                <th class="text-center">{{ assunto }}</th>
-                <th class="text-center">{{ dataEnvio }}</th>
-                <th class="text-center">{{ destino }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center">
-                  <q-checkbox v-model="val" />
-                </td>
-                <td class="text-center">{{ texto }}</td>
-                <td class="text-center">{{ local }}</td>
-                <td class="text-center">{{ dataEnv }}</td>
-                <td class="text-center">{{ destinatario }}</td>
-              </tr>
-              <tr>
-                <td class="text-center">
-                  <q-checkbox v-model="value" />
-                </td>
-                <td class="text-center">{{ texto }}</td>
-                <td class="text-center">{{ local }}</td>
-                <td class="text-center">{{ dataEnv }}</td>
-                <td class="text-center">{{ destinatario }}</td>
-              </tr>
-            </tbody>
-          </q-markup-table> -->
+          
         </div>
       </div>
     </div>
@@ -148,6 +128,7 @@ import { defineComponent } from "vue";
 import { ref } from "vue";
 
 const columns = [
+
   {
     name: "desc",
     required: true,
@@ -158,14 +139,14 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Data Inicial",
+    name: "DataInicial",
     align: "center",
     label: "Data de inicio",
     field: "dataInit",
     sortable: true,
   },
   {
-    name: "Data Final",
+    name: "DataFinal",
     align: "center",
     label: "Data de fim",
     field: "dataEnd",
@@ -184,6 +165,12 @@ const columns = [
     label: "Contratante",
     field: "contratante",
   },
+  {
+    name: "config",
+    align: "center",
+    label: "Configuração",
+    field: "Configuracao",
+  },
   { name: "edit", align: "center", label: "", field: "edit" },
 ];
 
@@ -194,22 +181,20 @@ const rows = [
     dataEnd: "18/10/2023",
     local: "Mané Garrincha",
     contratante: "Funn",
-    edit: "edit",
   },
+  {
+    name: 'Na praia',
+    dataInit: "20/10/2023",
+    dataEnd: "21/10/2023",
+    local: "ST de Clubes",
+    contratante: "R2",
+  },
+ 
 ];
 
 export default defineComponent({
   name: "IndexPage",
-  // props: {
-  //   texto: [],
-  //   dataEnv: [],
-  //   destinatario: [],
-  //   local: [],
-  //   empresa: [],
-  //   assunto: [],
-  //   dataEnvio: [],
-  //   destino: [],
-  // },
+  
   setup() {
     const selected = ref([]);
     const submitting = ref(false);
@@ -222,9 +207,16 @@ export default defineComponent({
         submitting.value = false;
       }, 3000);
     }
+    function onEdit(){
+      this.$router.push("/cadastroevento")
+    }
+    // function onDelete(){
+
+    // }
     return {
       submitting,
       submit,
+      onEdit,
       val: ref(false),
       value: ref(false),
       text: ref(""),

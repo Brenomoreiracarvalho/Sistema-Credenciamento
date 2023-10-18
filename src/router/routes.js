@@ -13,6 +13,14 @@ const routes = [
         path: "cadastroevento",
         component: () => import("pages/eventos/CadastroEvento.vue"),
       },
+      {
+        path: "cadastrofuncionario",
+        component: () => import("pages/eventos/CadastroFuncionario.vue"),
+      },
+      {
+        path: "funcionarios",
+        component: () => import("pages/eventos/Funcionarios.vue"),
+      },
     ],
   },
 
