@@ -27,7 +27,7 @@
         <q-btn color="grey" label="MENU PRINCIPAL" no-caps to="/home" />
         <q-btn color="grey" label="RELATÓRIOS" />
 
-        <q-btn color="grey" label="CADASTRO" />
+        <q-btn color="grey" label="FUNCIONÁRIOS" no-cpas to="/funcionarios" />
         <q-btn-dropdown color="grey" label="OUTROS">
           <q-list>
             <q-item clickable v-close-popup @click="onItemClick">
@@ -70,7 +70,10 @@
         <q-space />
 
         <div class="q-pa-md">
-          <q-date v-model="model" range />
+          DATA DO EVENTO (DD/MM/YYYY)
+          <div>
+            <q-date v-model="model" range />
+          </div>
         </div>
         <div class="row justify-end">
           <q-btn
@@ -99,7 +102,7 @@ export default defineComponent({
       console.log(this.contract);
       console.log(this.cnpj);
       console.log(this.model);
-      this.$router.push("/home")
+      this.$router.push("/home");
     },
   },
   setup() {

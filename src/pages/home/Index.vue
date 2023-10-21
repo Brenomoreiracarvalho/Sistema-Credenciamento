@@ -27,7 +27,7 @@
         <q-btn color="grey" label="EVENTOS" no-caps to="/eventos" />
         <q-btn color="grey" label="RELATÓRIOS" />
 
-        <q-btn color="grey" label="CADASTRO" />
+        <q-btn color="grey" label="FUNCIONÁRIOS" no-cpas to="/funcionarios" />
         <q-btn-dropdown color="grey" label="OUTROS">
           <q-list>
             <q-item clickable v-close-popup @click="onItemClick">
@@ -104,20 +104,19 @@
             selection="multiple"
             v-model:selected="selected"
           >
-          <!-- <template v-slot:body-cell-config="props">
+            <!-- <template v-slot:body-cell-config="props">
               <q-td :props="props">
               <q-btn icon="mode_settings" @click="onEdit()"></q-btn>
               </q-td>
             </template> -->
             <template v-slot:body-cell-edit="props">
               <q-td :props="props">
-              <q-btn icon="mode_settings" to="/funcionarios"></q-btn>
-              <q-btn icon="mode_edit" @click="onEdit()"></q-btn>
-              <q-btn icon="delete" @click="onDelete()"></q-btn>
+                <q-btn icon="mode_settings" to="/funcionarios"></q-btn>
+                <q-btn icon="mode_edit" @click="onEdit()"></q-btn>
+                <q-btn icon="delete" @click="onDelete()"></q-btn>
               </q-td>
             </template>
           </q-table>
-          
         </div>
       </div>
     </div>
@@ -128,7 +127,6 @@ import { defineComponent } from "vue";
 import { ref } from "vue";
 
 const columns = [
-
   {
     name: "desc",
     required: true,
@@ -183,18 +181,17 @@ const rows = [
     contratante: "Funn",
   },
   {
-    name: 'Na praia',
+    name: "Na praia",
     dataInit: "20/10/2023",
     dataEnd: "21/10/2023",
     local: "ST de Clubes",
     contratante: "R2",
   },
- 
 ];
 
 export default defineComponent({
   name: "IndexPage",
-  
+
   setup() {
     const selected = ref([]);
     const submitting = ref(false);
@@ -207,8 +204,8 @@ export default defineComponent({
         submitting.value = false;
       }, 3000);
     }
-    function onEdit(){
-      this.$router.push("/cadastroevento")
+    function onEdit() {
+      this.$router.push("/cadastroevento");
     }
     // function onDelete(){
 
